@@ -2,7 +2,7 @@ import '../scss/style.scss';
 // import variables from '../scss/_export.scss'; -> not working..
 import { _ } from './util.js';
 import * as Transceiver from './transceiver.js';
-import { initFormContainer } from './form.js';
+import { initFormContainer, initInterpretBtn } from './form.js';
 
 const SERVER = 'http://localhost:3000/';
 
@@ -16,10 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(res => res.json())
     .then(json => {
       const $txrx = _.$('.txrx');
+      const $receiveContainer = _.$('.receive-cont');
+
       Transceiver.initPies($txrx)(PIE_CNT);
       Transceiver.initArrowContainer($txrx)(json.arrowImg);
 
-      initFormContainer(_.$('.receive-cont'))({
+      initFormContainer($receiveContainer)({
         title: '송수신정보', 
         btnContent: '해석하기',
         btnClass: 'interpret-btn',
@@ -29,6 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
         btnContent: '지구로 보내기',
         btnClass: 'transmit-btn',
       });
+
+      initInterpretBtn($receiveContainer);
 
       Transceiver.runTransceiver($txrx, {
         serverUrl: SERVER,

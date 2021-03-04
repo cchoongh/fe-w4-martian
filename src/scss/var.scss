@@ -1,4 +1,8 @@
 $circle-radius: 260px;
+$circle-top: 20px;
+$circle-left: 60px;
+$circle-center-x: $circle-left + $circle-radius;
+$circle-center-y: $circle-top + $circle-radius;
 
 $pie-cnt: 16;
 $pie-angle: 360deg / $pie-cnt;

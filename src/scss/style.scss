@@ -6,18 +6,37 @@
   box-sizing: border-box;
 }
 
+html {
+  width: 100%;
+  height: 100%;
+}
+
 body {
-  min-width: 1000px;
-  min-height: 1000px;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  min-width: 850px;
+  min-height: 750px;
   position: relative;
+}
+
+.blur-screen {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: $darkgray;
+  opacity: 0.5;
+  z-index: 1;
 }
 
 .txrx {
   width: $circle-radius * 2;
   height: $circle-radius * 2;
   position: relative;
-  top: 10%;
-  left: 10%;
+  top: $circle-top;
+  left: $circle-left;
   background-color: $redorange;
   border: 3px solid $black;
   border-radius: 9999px;
@@ -113,8 +132,8 @@ body {
 
 %form-cont {
   display: inline-block;
-  margin-top: 30px;
-  margin-left: 7.5%;
+  margin-top: 40px;
+  margin-left: 50px;
 
   .title {
     color: $black;
@@ -149,5 +168,44 @@ body {
   
   .transmit-btn {
     @extend %btn;
+  }
+}
+
+.message-popup {
+  $width: $circle-radius; 
+
+  display: none;
+  width: $width;
+  padding: 10px;
+  position: absolute;
+  top: $circle-center-y - 40px;
+  left: $circle-center-x - ($width / 2);
+  border: 4px solid $gray;
+  border-radius: 20px;
+  background-color: $lightgray2;
+  z-index: 2;
+
+  &.show {
+    display: inline-block;
+  }
+
+  .message {
+    display: block;
+    margin-top: 8px;
+    text-align: center;
+    font-size: 20px;
+    color: $black;
+  }
+
+  .confirm-btn {
+    display: block;
+    padding: 0px 20px 2px 20px;
+    margin: 0 auto;
+    margin-top: 10px;
+    border-radius: 4px;
+    background-color: $yellowgreen;
+    text-align: center;
+    font-size: 20px;
+    color: $white;
   }
 }

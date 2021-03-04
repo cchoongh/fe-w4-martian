@@ -42,10 +42,7 @@ export const initArrowContainer = ($txrx) => {
   };
 };
 
-export const runTransceiver = (
-  $txrx,
-  { serverUrl, commInterval, blinkInterval, blinkCnt }
-) => {
+export const runTransceiver = ($txrx, { serverUrl, commInterval, blinkInterval, blinkCnt }) => {
   const $receiveForm = _.$('.form', $txrx.nextElementSibling);
   const $arrow = _.$('.arrow', $txrx);
   const $hexs = _.$('.hex-cont', $txrx).children;
