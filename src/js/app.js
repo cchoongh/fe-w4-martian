@@ -2,7 +2,7 @@ import '../scss/style.scss';
 // import variables from '../scss/_export.scss'; -> not working..
 import { _ } from './util.js';
 import * as Transceiver from './transceiver.js';
-import { initFormContainer, initInterpretBtn } from './form.js';
+import * as Form from './form.js';
 
 const SERVER = 'http://localhost:3000/';
 
@@ -17,28 +17,31 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(json => {
       const $txrx = _.$('.txrx');
       const $receiveContainer = _.$('.receive-cont');
+      const $transmitContainer = _.$('.transmit-cont');
 
       Transceiver.initPies($txrx)(PIE_CNT);
       Transceiver.initArrowContainer($txrx)(json.arrowImg);
 
-      initFormContainer($receiveContainer)({
+      Form.initFormContainer($receiveContainer)({
         title: '송수신정보', 
         btnContent: '해석하기',
         btnClass: 'interpret-btn',
       });
-      initFormContainer(_.$('.transmit-cont'))({
+      Form.initFormContainer($transmitContainer)({
         title: '발신정보입력',
         btnContent: '지구로 보내기',
         btnClass: 'transmit-btn',
       });
 
-      initInterpretBtn($receiveContainer);
+      Form.initInterpretBtn($receiveContainer);
+      const getTransmitBtnState = Form.initTransmitBtn($transmitContainer, $txrx);
 
       Transceiver.runTransceiver($txrx, {
-        serverUrl: SERVER,
+        url: SERVER,
         commInterval: COMMUNICATION_INTERVAL,
         blinkInterval: BLINK_INTERVAL,
         blinkCnt: BLINK_CNT,
+        transmitBtnState: getTransmitBtnState,
       });
     });
 });

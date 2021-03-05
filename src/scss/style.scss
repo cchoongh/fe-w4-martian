@@ -157,7 +157,7 @@ body {
 
 .receive-cont {
   @extend %form-cont;
-  left: -20px;
+  left: $receive-cont-left;
 
   .interpret-btn {
     @extend %form-cont__btn;
@@ -171,6 +171,13 @@ body {
   .transmit-btn {
     @extend %form-cont__btn;
   }
+
+  .message-popup {
+    $width: $circle-radius;
+    position: absolute;
+    top: -$circle-center-y - 40px;
+    left: -$circle-center-x + ($width / 2);
+  }
 }
 
 .message-popup {
@@ -180,12 +187,13 @@ body {
   width: $width;
   padding: 10px;
   position: absolute;
-  top: $circle-center-y - 40px;
-  left: $circle-center-x - ($width / 2);
+  top: -$circle-center-y - 40px;
+  left: $circle-center-x - ($width / 2) + $receive-cont-left;
   border: 4px solid $gray;
   border-radius: 20px;
   background-color: $lightgray2;
   z-index: 2;
+  text-align: center;
 
   &.show {
     display: inline-block;
@@ -202,7 +210,7 @@ body {
   .confirm-btn {
     display: inline-block;
     padding: 0px 20px 2px 20px;
-    margin: 0 auto;
+    // margin: 0 auto;
     margin-top: 10px;
     border-radius: 4px;
     background-color: $yellowgreen;
@@ -214,8 +222,9 @@ body {
   .cancel-btn {
     display: inline-block;
     padding: 0px 20px 2px 20px;
-    margin: 0 auto;
+    // margin: 0 auto;
     margin-top: 10px;
+    margin-left: 10px;
     border-radius: 4px;
     background-color: $redorange;
     text-align: center;

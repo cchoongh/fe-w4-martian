@@ -7,6 +7,7 @@ const rl = readline.createInterface({
 const initCommunication = (buffer) => {
   rl.on("line", (line) => {
     buffer.push(...line);
+    buffer.push('\n');
   });
 
   return () => {
