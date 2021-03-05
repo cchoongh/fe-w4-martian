@@ -51,8 +51,8 @@ export default class MyPromise {
       try {
         const fulfilledResult = this.onFulfilled?.(result);
 
-        if (fulfilledResult) this.next?.resolve(fulfilledResult);
-        else this.next?.onFinally?.();
+        this.next?.resolve(fulfilledResult);
+        this.next?.onFinally?.();
       } catch (err) {
         this.internalCatched(err);
       } finally {
@@ -67,8 +67,8 @@ export default class MyPromise {
         if (result instanceof Error)
           throw result;
 
-        const rejectedResult = this.onRejected(result);
-        this.next?.reject(rejectedResult);
+        this.onRejected?.(result);
+        this.executeOnFinally();
       } catch (err) {
         this.internalCatched(err);
       } finally {
@@ -101,7 +101,7 @@ export default class MyPromise {
   }
 
   executeOnFinally() {
-    if (this.onFinally) return this.onFinally();
-    else this.next.executeOnFinally();
+    if (this.onFinally?.());
+    else this.next?.executeOnFinally();
   }
 }
